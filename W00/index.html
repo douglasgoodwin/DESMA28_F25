@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>DESMA 28 · Interactivity</title>
+
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <!-- p5.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" defer></script>
+        <script src="sketch.js" defer></script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="wrap">
+                <a class="brand" href="#">
+                    <span class="dma-bubble">Design Media Arts</span>
+                    <span class="brand-text">Interactivity W00</span>
+                </a>
+                <nav class="meta">
+                    <span>DESMA 28</span>
+                    <span>Prof. Goodwin</span>
+                </nav>
+            </div>
+        </header>
+
+        <main class="wrap">
+            <article class="card">
+                <header class="card-header">
+                    <h1>W00</h1>
+                    <h2>Orientation: Hello, p5.js</h2>
+                </header>
+                
+               <div id="canvas-container"></div>
+
+                <section class="intro">
+
+
+<p>When you think about computers, don’t just imagine spreadsheets or engineering tools. Think of them as media machines — instruments for imagination, expression, and culture. In this class, you’re not learning code just to calculate or automate; you’re learning it to make, play, and express yourself.</p>
+
+<p>We’ll be using p5.js, which was created to make programming approachable for artists and designers. Instead of walls of intimidating syntax, you get a canvas in the browser and simple commands like <pre>ellipse()</pre> and <pre>rect()</pre>. You don’t need a computer science degree to use it — you only need curiosity and the willingness to experiment.</p>
+
+<p>You’ll start with the fundamentals: the canvas, coordinates, and functions. You’ll learn how to give arguments and parameters to those functions, and how the code runs top to bottom in a repeating loop. Even the simplest sketch — a circle drawn at a position, a rectangle with color — is the seed of something larger. From there, you’ll build systems of interaction, animation, and critique.</p>
+
+<p>Most importantly, you’ll learn to see differently. You’ll start seeing software as a set of choices, systems, and rules — not as something handed down by tech companies, but as something you can shape. Coding gives you control beyond “point-and-click” presets. It lets you build your own tools, reflect on culture, and even challenge power.</p>
+
+<p>This is your invitation: treat code as generative, conceptual, and critical. And remember — from the very first circle you draw, you’re not just programming a computer, you’re starting a conversation with it.</p>
+
+<H2>Introducing Interactivity & the Button</H2>
+
+<p>Up until now, we’ve thought about code as a way to draw shapes on a canvas — circles, rectangles, colors. But interactivity changes everything.</p>
+
+<p>When you add interactivity, your sketch stops being a static picture and becomes a conversation. The computer doesn’t just show you something; it responds to you.</p>
+
+<p>The simplest unit of interactivity is the button. A button is a tiny contract between you and the system: “When I press this, something happens.”</p>
+
+
+<li>A momentary button acts only while you hold it down.
+<li>A latching button holds its state until you press it again.
+<li>But even the most basic button introduces the key ideas of input, condition, and response.
+
+
+<H3>Processing Code Example: Button → Background Red</H3>
+
+<P></P>
+                </section>
+                <section class="notes">
+					<PRE>
+// ----------------------------------------------
+// DESMA28: INTERACTIVITY
+// W01 | Hello, Button!
+// ----------------------------------------------
+
+// Button position and size
+let btnX = 350;   // x-coordinate of top-left corner
+let btnY = 150;   // y-coordinate of top-left corner
+let btnW = 100;   // width of the button
+let btnH = 50;    // height of the button
+
+// Button state: true when pressed, false when not
+let buttonPressed = false;
+
+function setup() {
+  // Create a canvas that is 800px wide and 400px tall
+  // "cnv" stores the canvas object so we can attach it to HTML
+  let cnv = createCanvas(800, 400);
+
+  // Attach canvas to a <div> with id="canvas-container"
+  // This makes the canvas appear in the right spot in your webpage
+  cnv.parent('canvas-container');
+
+  // Align text so it’s centered horizontally and vertically
+  textAlign(CENTER, CENTER);
+
+  // Make the text a little larger
+  textSize(16);
+}
+
+function draw() {
+  // If the button is pressed, make the background red
+  // Otherwise, make it light gray
+  if (buttonPressed) {
+    background(255, 0, 0); // RGB for red
+  } else {
+    background(220); // light gray
+  }
+
+  // Draw the button rectangle
+  stroke(0); // black border
+  if (buttonPressed) {
+    fill(200, 0, 0); // darker red while pressed
+  } else {
+    fill(240); // light gray when not pressed
+  }
+  rect(btnX, btnY, btnW, btnH, 8); // last number = rounded corners
+
+  // Draw the button label text on top of the rectangle
+  fill(0); // black text
+  noStroke(); // no border around text
+  text("Press Me", btnX + btnW / 2, btnY + btnH / 2);
+}
+
+function mousePressed() {
+  // Check if the mouse is inside the button area when clicked
+  if (mouseX > btnX && mouseX < btnX + btnW &&
+      mouseY > btnY && mouseY < btnY + btnH) {
+    buttonPressed = true; // turn "on"
+  }
+}
+
+function mouseReleased() {
+  // When the mouse is released, turn "off"
+  buttonPressed = false;
+}
+					</PRE>
+
+                </section>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="wrap small">
+                <p>
+                    <span id="year"></span>
+                    DESMA 28 · Interactivity</p>
+                    <p class="idblock">
+                        <strong>Name:</strong> <span class="fill">[Your Full Name]</span> ·
+                        <strong>Date:</strong> <span class="fill">[MM/DD/YY]</span>
+                    </p>
+            </div>
+        </footer>
+
+    </body>
+</html>
