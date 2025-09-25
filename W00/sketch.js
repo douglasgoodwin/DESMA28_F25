@@ -15,31 +15,39 @@ function setup() {
   let cnv = createCanvas(800, 400);
   cnv.parent('canvas-container');
   
-  x = width / 2;
-  y = height / 2;
-  dx = 3;       // horizontal speed
-  dy = 2;       // vertical speed
+  // initialize position and velocity
+  x = 100;
+  y = 100;
+  dx = 3;
+  dy = 2;
 }
 
-
 function draw() {
-  background(255);
+  background(250);
 
-  // Update position
+  // update position
   x += dx;
   y += dy;
 
-  // Check for collisions with edges
+  // bounce off edges
   if (x - r < 0 || x + r > width) {
-    dx *= -1;   // reverse horizontal velocity
+    dx *= -1;
   }
   if (y - r < 0 || y + r > height) {
-    dy *= -1;   // reverse vertical velocity
+    dy *= -1;
   }
 
-  // Draw the ball
-  noFill()
-  stroke(0);
-  strokeWeight(2);
+  // draw ball
   circle(x, y, r * 2);
+
+  // draw text feedback
+  fill(0);
+  textSize(16);
+  text(`x: ${x}`, 10, 20);
+  text(`y: ${y}`, 10, 40);
+  text(`dx: ${dx}`, 10, 60);
+  text(`dy: ${dy}`, 10, 80);
+
+  // also log to console
+  console.log(`x=${x}, y=${y}, dx=${dx}, dy=${dy}`);
 }

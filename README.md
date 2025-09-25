@@ -55,82 +55,116 @@ Below are three common approaches, depending on your setup:
 
 ---
 
-### 1. Run with Python (cross-platform)
+Great idea — students often need a **simple Git workflow** written down. Here’s a **student-friendly Git section** you can add to your README or a separate GIT_GUIDE.md. It’s streamlined to the basics: clone, edit, commit, push.
 
-From the root of this repository, **open a terminal** and run:
 
+
+```
+## Working with Git (Basics)
+
+We use Git to keep track of your code and submit work. Here’s the workflow:
+
+### 1. Clone the repository (first time only)
+This copies the course repo to your computer.
 ```bash
-# Do you have Python?
-python -V
-
-# Python 3 (most common)
-python3 -m http.server 8000
-
-# If you only have Python 2:
-python -m SimpleHTTPServer 8000
-```
-
-**Then click here**: **http://localhost:8000**
-
-Magic!
-
-```text
-# Stop the server by typing <ctrl + c> in the terminal window.
+git clone https://github.com/YOUR-ORG/DESMA28.git
+cd DESMA28
 ```
 
 
 
-### **2. Run with Node.js**
+### **2. Create a new branch (optional but recommended)**
 
-If you have **Node.js** installed:
+Keeps your changes separate until you’re ready to merge.
 
-```bash
-# Install http-server once (globally)
-npm install -g http-server
-
-# Then run inside this directory
-http-server -p 8000
+```
+git checkout -b my-week01-exercise
 ```
 
-**Then visit: http://localhost:8000**
-
-Stop with **Ctrl + C**.
 
 
+### **3. Edit your files**
 
-### **3. Run with VS Code**
+- Open W01/sketch.js (or the week’s folder) in VS Code.
+- Run a local server (live-server or Python).
+- Save and test your changes in the browser.
 
-Yes! VS Code can run a local server if you install the **Live Server** extension:
+### **4. Check which files changed**
 
-1. Open this folder in VS Code.
-2. Install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
-3. Right-click on index.html → **Open with Live Server**.
-4. It will launch a browser window, usually at http://127.0.0.1:5500.
+```
+git status
+```
 
-​	
+### **5. Stage your changes**
 
----
+This marks files to be saved in the next commit.
 
-## Links
+```
+git add W01/sketch.js
+```
 
-- Project Index: http://localhost:8000
-- p5.js Documentation: https://p5js.org/reference/
-- UCLA DMA: https://www.design.ucla.edu/
+Or stage everything:
+
+```
+git add .
+```
 
 
 
-# Weekly Exercises
+### **6. Commit your changes**
 
-## Index of Assignments
+Write a short message about what you did.
 
-- [W00 and Orientation & Setup](http://localhost:8000/W00/index.html)
-- [W01 and Introduction: What Is a Button?](http://localhost:8000/W01/index.html)
-- [W02 and Momentary vs. Latching (Persistence)](http://localhost:8000/W02/index.html)
-- [W03 and Normally Open / Normally Closed (Safety Logic)](http://localhost:8000/W03/index.html)
-- [W04 and Two-Switch Light (Distributed State)](http://localhost:8000/W04/index.html)
-- [W05 and Spatial Input (Where Matters)](http://localhost:8000/W05/index.html)
-- [W06 and Continuous Input (How Much Matters)](http://localhost:8000/W06/index.html)
-- [W07 and Combining Discrete + Continuous](http://localhost:8000/W07/index.html)
-- [W08 and Sensors as Buttons (Environment as Input)](http://localhost:8000/W08/index.html)
-- [W09 and Remote/Shared State (Multi-user)](http://localhost:8000/W09/index.html)
-- [W10 and Integration, Presentation, Reflection](http://localhost:8000/W10/index.html)
+```
+git commit -m "Finished Exercise 1: Background button"
+```
+
+
+
+### **7. Push to GitHub**
+
+Send your commits to the remote repo.
+
+```
+git push origin my-week01-exercise
+```
+
+
+
+### **8. Pull latest updates (important!)**
+
+Before starting new work, always pull updates from the main repo.
+
+```
+git checkout main
+git pull origin main
+```
+
+### **Quick Commands Reference**
+
+- git status → What changed?
+- git add <file> → Stage a file for commit
+- git commit -m "Message" → Save a snapshot
+- git push origin <branch> → Upload your work
+- git pull origin main → Get the latest updates
+
+### **Common Tips**
+
+- **Commit often**: small, meaningful commits are easier to manage than one giant one.
+- **Write clear messages**: e.g., Added toggle button, not just stuff.
+- **Don’t edit other people’s folders**: keep to your own weekly work.
+- **If you break something**: you can always go back with git checkout.
+
+
+
+## **Git + Canvas**
+
+If the class uses GitHub:
+
+- Push your work regularly.
+- Submit the **link to your branch or folder** in Canvas.
+
+If not:
+
+- Zip your folder and upload. Git is still useful locally for version control.
+

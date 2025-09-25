@@ -1,4 +1,9 @@
-DS_Store
+*.pdf
+xinxin_tutorial01.txt
+*.m4a
+SixFeatures-master
+
+.DS_Store
 .AppleDouble
 .LSOverride
 Icon

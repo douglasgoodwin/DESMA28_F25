@@ -1,150 +1,28 @@
-/* ----------------------------------------------
-   DESMA28 · DMA-inspired boilerplate
-   Mirrors DMA variables + bubble tag style
-   ---------------------------------------------- */
-
-/* DMA-like custom properties */
-html {
-  -webkit-text-size-adjust: 100%;
-  box-sizing: border-box;
+:root{
+  --background-color:#fff;
+  --font: diatype-semimono,Arial,sans-serif;
+  --text-font: Practice,Times,serif;
+  --mono-font: diatype-mono,monospace;
+  --text-base: 1.375rem;
+  --text-lg: 2.0rem;
+  --leading-normal: 1.2;
+  --site-blue: #4040ff;
+  --site-grey: #404040;
 }
-
-body {
-  margin: 0;
-  background: #ff0;
-  color: #111;
-  font-family: diatype-semimono, Arial, sans-serif;
-  font-size: 1.375rem;
-  line-height: 1.2;
-  letter-spacing: -.015em;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-.wrap {
-  width: min(100%, 980px);
-  margin-inline: auto;
-  padding: 24px;
-}
-
-.wrap.small { width: min(100%, 760px); }
-
-/* Header bar */
-.site-header {
-  background: #FFF; /* DMA site uses strong, simple bars; keep it crisp */
-  color: #666;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.site-header .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* DMA bubble (the “Design Media Arts” tag chip) */
-.dma-bubble {
-  display: inline-block;
-  padding: 2px 0.9em 2px;
-  border: 2px solid #4040ff;
-  border-radius: 999px;
-  color: #4040ff;
-  text-decoration: none;
-  font-family: diatype-mono, monospace;
-  font-size: 0.95em;
-  line-height: 1;
-  white-space: nowrap;
-  transition: background-color .2s ease, color .2s ease, transform .06s ease;
-}
-
-.dma-bubble:hover,
-.dma-bubble:focus {
-  background: #4040ff;
-  color: #fff;
-  outline: none;
-}
-
-.dma-bubble:active {
-  transform: translateY(1px);
-}
-
-/* Brand text next to the bubble */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: .75rem;
-  text-decoration: none;
-  color: #000;
-}
-
-.brand-text {
-  font-weight: 800;
-  letter-spacing: -.01em;
-}
-
-nav.meta {
-  display: inline-flex;
-  gap: 1rem;
-  opacity: .95;
-  font-weight: 600;
-  font-family: diatype-mono, monospace;
-  font-size: 10pt;
-}
-
-/* Card */
-.card {
-  background: #fff;
-  border: 1px solid 2px;
-  border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(0,0,0,.06);
-  padding: 14px;
-}
-
-.card-header {
-  border-bottom: 1px solid 2px;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-h1 {
-  margin: 0 0 6px 0;
-  font-size: clamp(28px, 4vw, 42px);
-  line-height: 1em;
-  font-weight: 900;
-}
-
-h2 {
-  margin: 0 0 8px 0;
-  font-weight: 800;
-  font-size: clamp(18px, 2.4vw, 22px);
-}
-
-h3 {
-  margin: 12px 0 6px 0;
-  font-size: 18px;
-  font-weight: 800;
-}
-
-p { margin: 0 0 12px 0; }
-
-.idblock {
-  margin-top: 6px;
-  font-size: 10pt;
-  color: #999;
-  font-family: diatype-mono, monospace;
-}
-
-.intro { margin-top: 6px; }
-
-.canvas-block {
-  margin: 18px 0;
-  padding: 14px;
-  border: 1px dashed 2px;
-  border-radius: 12px;
-  background: #fff;
-}
-
-.controls { margin-top: 10px; }
-
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#111;font-family:var(--font);font-size:var(--text-base);line-height:var(--leading-normal);letter-spacing:-.015em}
+.wrap{max-width:960px;margin:0 auto;padding:20px}
+.site-header,.site-footer{border-top:4px solid var(--site-blue);border-bottom:1px solid #eee}
+.brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}
+.dma-bubble{display:inline-block;padding:.3em .6em;border:2px solid #111;border-radius:999px;font-weight:700}
+.brand-text{opacity:.8}
+.card{border:1px solid #eee;border-radius:12px;padding:20px;margin:24px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.card-header h1{font-size:var(--text-lg);margin:.2em 0}
+h1,h2,h3{margin:.3em 0}
+.idblock{font-size:.9em;color:#444}
+#canvas-container{border:1px dashed #999;border-radius:12px;min-height:420px;display:flex;align-items:center;justify-content:center;margin:14px 0}
+.small{font-size:.9rem;color:#555}
+a{color:var(--site-blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.fill{padding:0 .25em;border-bottom:1px dotted #aaa}
+.instructions li{margin:.2em 0}

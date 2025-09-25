@@ -1,77 +1,59 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Theme list aligned with weeks
-themes=(
-  "Orientation & Setup"                                # W00
-  "Introduction: What Is a Button?"                    # W01
-  "Momentary vs. Latching (Persistence)"               # W02
-  "Normally Open / Normally Closed (Safety Logic)"     # W03
-  "Two-Switch Light (Distributed State)"               # W04
-  "Spatial Input (Where Matters)"                      # W05
-  "Continuous Input (How Much Matters)"                # W06
-  "Combining Discrete + Continuous"                    # W07
-  "Sensors as Buttons (Environment as Input)"          # W08
-  "Remote/Shared State (Multi-user)"                   # W09
-  "Integration, Presentation, Reflection"              # W10
-)
+COURSE_TITLE="DESMA 28 · Interactivity"
+COURSE_CODE="DESMA 28"
+INSTRUCTOR="Prof. Goodwin"
 
-cat > index.html <<EOF
+CSS_PATH="css/style.css"
+if [ ! -f "$CSS_PATH" ]; then
+  echo "⚠️ No css/style.css found. Please create one."
+fi
+
+WEEK_DIRS=$(find . -maxdepth 1 -type d -name "W[0-9][0-9]" | sort)
+LINKS=""
+for DIR in $WEEK_DIRS; do
+  WEEK=$(basename "$DIR")
+  THEME=$(grep -m1 '<h1>' "$DIR/index.html" | sed -E 's/<[^>]+>//g' | sed -E 's/^W[0-9][0-9][[:space:]]·[[:space:]]?//')
+  [ -z "$THEME" ] && THEME="Untitled"
+  LINKS="$LINKS        <li><a href=\"$WEEK/index.html\">$WEEK · $THEME</a></li>\n"
+done
+
+cat > index.html <<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DESMA 28 · Interactivity · Weekly Index</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>${COURSE_TITLE} · Index</title>
+  <link rel="stylesheet" href="${CSS_PATH}" />
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#">
         <span class="dma-bubble">Design Media Arts</span>
-        <span class="brand-text">Weekly Index</span>
+        <span class="brand-text">${COURSE_TITLE}</span>
       </a>
       <nav class="meta">
-        <span>DESMA 28</span>
-        <span>Prof. Goodwin</span>
+        <span>${COURSE_CODE}</span> · <span>${INSTRUCTOR}</span>
       </nav>
     </div>
   </header>
-
   <main class="wrap">
     <article class="card">
-      <header class="card-header">
-        <h1>Weekly Exercises</h1>
-        <h2>Index of Assignments</h2>
-      </header>
-      <section class="intro">
-        <ul>
-EOF
-
-for n in $(seq 0 10); do
-  code=$(printf "W%02d" "$n")
-  theme="${themes[$n]}"
-  echo "          <li><a href=\"$code/index.html\">$code and $theme</a></li>" >> index.html
-done
-
-cat >> index.html <<EOF
-        </ul>
-      </section>
+      <header><h1>Weekly Templates</h1></header>
+      <ul class="weeks">
+$(printf "%b" "$LINKS")
+      </ul>
     </article>
   </main>
-
   <footer class="site-footer">
-    <div class="wrap small">
-      <p><span id="year"></span> DESMA 28 · Interactivity</p>
-    </div>
+    <div class="wrap small">&copy; <span id="year"></span> DESMA 28 · Interactivity</div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
-EOF
+HTML
 
-echo "Created master index.html with links to W00..W10"
+echo "✔ Built root index.html using css/style.css."
