@@ -4,21 +4,42 @@ set -euo pipefail
 COURSE_TITLE="DESMA 28 · Interactivity"
 COURSE_CODE="DESMA 28"
 INSTRUCTOR="Prof. Goodwin"
-
 CSS_PATH="css/style.css"
+
+# Warn if CSS missing (still writes the page)
 if [ ! -f "$CSS_PATH" ]; then
-  echo "⚠️ No css/style.css found. Please create one."
+  echo "⚠️  Warning: $CSS_PATH not found. The page will render unstyled."
 fi
 
+# Find Wxx dirs, sorted
 WEEK_DIRS=$(find . -maxdepth 1 -type d -name "W[0-9][0-9]" | sort)
+
+# Build list items
 LINKS=""
 for DIR in $WEEK_DIRS; do
-  WEEK=$(basename "$DIR")
-  THEME=$(grep -m1 '<h1>' "$DIR/index.html" | sed -E 's/<[^>]+>//g' | sed -E 's/^W[0-9][0-9][[:space:]]·[[:space:]]?//')
-  [ -z "$THEME" ] && THEME="Untitled"
-  LINKS="$LINKS        <li><a href=\"$WEEK/index.html\">$WEEK · $THEME</a></li>\n"
+  WEEK=$(basename "$DIR")   # e.g., W03
+
+  TITLE="Untitled Exercise"
+  if [ -f "$DIR/index.html" ]; then
+    # Extract first <h1> line and strip tags
+    H1_RAW=$(grep -m1 '<h1>' "$DIR/index.html" || true)
+    if [ -n "$H1_RAW" ]; then
+      TITLE=$(printf "%s" "$H1_RAW" | sed -E 's/<[^>]+>//g' | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')
+      # If the title already starts with Wxx, keep it; else prefix for clarity
+      if ! printf "%s" "$TITLE" | grep -qE '^W[0-9]{2}\b'; then
+        TITLE="$WEEK — $TITLE"
+      fi
+    else
+      TITLE="$WEEK — Untitled Exercise"
+    fi
+  else
+    TITLE="$WEEK — (no index.html)"
+  fi
+
+  LINKS="${LINKS}        <li><a href=\"${WEEK}/index.html\">${TITLE}</a></li>\n"
 done
 
+# Write root index.html
 cat > index.html <<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -40,14 +61,18 @@ cat > index.html <<HTML
       </nav>
     </div>
   </header>
+
   <main class="wrap">
     <article class="card">
-      <header><h1>Weekly Templates</h1></header>
+      <header class="card-header">
+        <h1>Weekly Templates</h1>
+      </header>
       <ul class="weeks">
 $(printf "%b" "$LINKS")
       </ul>
     </article>
   </main>
+
   <footer class="site-footer">
     <div class="wrap small">&copy; <span id="year"></span> DESMA 28 · Interactivity</div>
   </footer>
@@ -56,4 +81,4 @@ $(printf "%b" "$LINKS")
 </html>
 HTML
 
-echo "✔ Built root index.html using css/style.css."
+echo "Built root index.html with $(echo "$WEEK_DIRS" | wc -w) week link(s)."

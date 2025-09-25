@@ -100,7 +100,7 @@ for DIR in $WEEK_DIRS; do
 
         <section class="notes">
           <h3>Notes</h3>
-          <p># # #</p>
+          <p>This is the default sketch--a momentary button.</p>
         </section>
 
         <section>

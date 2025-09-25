@@ -50,14 +50,17 @@ function draw() {
 }
 
 function mousePressed() {
-  // check if mouse is inside button bounds
-  const inside =
+  if (
     mouseX > buttonX - buttonW/2 &&
     mouseX < buttonX + buttonW/2 &&
     mouseY > buttonY - buttonH/2 &&
-    mouseY < buttonY + buttonH/2;
-
-  if (inside) {
-    buttonPressed = !buttonPressed; // toggle state
+    mouseY < buttonY + buttonH/2
+  ) {
+    buttonPressed = true; // turn on only while pressed
   }
 }
+
+function mouseReleased() {
+  buttonPressed = false; // reset when mouse is released
+}
+
