@@ -3,6 +3,26 @@ xinxin_tutorial01.txt
 *.m4a
 SixFeatures-master
 
+
+# -----------------------------------
+# Node.js
+# -----------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# Build / cache
+dist/
+build/
+.cache/
+.tmp/
+
+# -----------------------------------
+# macOS
+# -----------------------------------
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -21,3 +41,44 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
+# -----------------------------------
+# Linux
+# -----------------------------------
+*~
+.nfs*
+
+# -----------------------------------
+# Windows
+# -----------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# -----------------------------------
+# VS Code / IDE metadata
+# -----------------------------------
+.vscode/
+.history/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# -----------------------------------
+# Logs / temp
+# -----------------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# -----------------------------------
+# Misc
+# -----------------------------------
+.env
+*.local

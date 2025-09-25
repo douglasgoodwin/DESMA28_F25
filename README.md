@@ -30,141 +30,135 @@ For this foundation we will focus on five sets of ideas:
 + Tools and Interactions
 + Functions and Parameters
 
-## What's here
+---
 
-Students will work through **10 weeks of exercises**, beginning with simple buttons and moving toward immersive, sensor-driven, and multi-user interactive projects.
+# Weekly exercise template
 
+This repo is your working template for all weekly exercises and projects in the course. Each week has its own folder (`W01`, `W02`, …) with:
 
+- `index.html` → weekly instructions and canvas container  
+- `sketch.js` → p5.js code you will edit  
+- Shared `css/style.css` for design/branding  
+
+The **root index** (`index.html`) links to all weekly templates.
 
 ---
 
-Each week (`W00` through `W10`) has its own directory with:
+## Project Structure
 
-- `index.html` → project page and assignment notes
-- `style.css` → shared styling (in `/css`)
-- `sketch.js` → starter p5.js code
-
-
-
----
-
-## Running the Project Locally
-
-These files are written for the **browser**, so you’ll need to run a simple local webserver.  
-Below are three common approaches, depending on your setup:
-
----
-
-Great idea — students often need a **simple Git workflow** written down. Here’s a **student-friendly Git section** you can add to your README or a separate GIT_GUIDE.md. It’s streamlined to the basics: clone, edit, commit, push.
-
-
-
+```text
+css/
+style.css        ← shared stylesheet
+index.html         ← root index linking all weeks
+W01/
+index.html       ← weekly page (edit name/date, instructions included)
+sketch.js        ← starter p5.js sketch
+W02/
+…
+…
+scripts/
+make_indexes.sh  ← generate weekly pages
+make_jsfiles.sh  ← generate sketch.js files
+main_index.sh    ← rebuild root index
+server.js          ← optional Node server with cache disabled
+README.md          ← you are here
 ```
-## Working with Git (Basics)
 
-We use Git to keep track of your code and submit work. Here’s the workflow:
 
-### 1. Clone the repository (first time only)
-This copies the course repo to your computer.
+## Running Locally
+
+You need a local web server (browsers block p5.js if loaded directly from `file://`).
+
+### Option 1 · Python (comes with macOS/Linux)
 ```bash
-git clone https://github.com/YOUR-ORG/DESMA28.git
-cd DESMA28
+cd DESMA28_F25
+python3 -m http.server 8000
 ```
 
+Now open http://localhost:8000.
+
+### Option 2 · Node.js with live-server (recommended)
+
+live-server reloads the browser when you save and disables caching.
+	1.	Install once:
+
+`npm install -g live-server`
+
+	2.	Run in your project folder:
+
+`live-server --port=8000 --no-browser --watch=.`
+
+	3.	Open: http://localhost:8000
 
 
-### **2. Create a new branch (optional but recommended)**
-
-Keeps your changes separate until you’re ready to merge.
-
-```
-git checkout -b my-week01-exercise
-```
+### Option 3 · VS Code (Live Server extension)
+	•	Install the Live Server extension by Ritwick Dey.
+	•	Right-click index.html → Open with Live Server.
+	•	Opens at http://127.0.0.1:5500 by default.
 
 
+## Workflow for Students
 
-### **3. Edit your files**
+Each week:
+	1.	Go to the right folder (W01, W02, etc.)
+	2.	Open sketch.js in VS Code
+	3.	Edit and test locally using live-server or Python
+	4.	Document your notes inside index.html or with comments in code
+	5.	Commit and push to GitHub (see below)
+	6.	Submit your work (Canvas or GitHub link depending on assignment)
 
-- Open W01/sketch.js (or the week’s folder) in VS Code.
-- Run a local server (live-server or Python).
-- Save and test your changes in the browser.
-
-### **4. Check which files changed**
-
-```
-git status
-```
-
-### **5. Stage your changes**
-
-This marks files to be saved in the next commit.
-
-```
-git add W01/sketch.js
-```
-
-Or stage everything:
-
-```
-git add .
-```
-
-
-
-### **6. Commit your changes**
-
-Write a short message about what you did.
+## Basic Git Workflow
 
 ```
-git commit -m "Finished Exercise 1: Background button"
+# First Time
+git clone https://github.com/YOUR-USERNAME/DESMA28_F25.git
+cd DESMA28_F25
 ```
 
+### Each Week
 
-
-### **7. Push to GitHub**
-
-Send your commits to the remote repo.
-
-```
-git push origin my-week01-exercise
-```
-
-
-
-### **8. Pull latest updates (important!)**
-
-Before starting new work, always pull updates from the main repo.
-
-```
+```text
+# Get the latest version
 git checkout main
 git pull origin main
+
+# Make a branch for your exercise
+git checkout -b week01-exercise
+
+# Edit your files
+# (W01/sketch.js, W01/index.html)
+
+# Stage & commit
+git add W01/sketch.js W01/index.html
+git commit -m "Finished Exercise 1: Background Button"
+
+# Push your branch
+git push origin week01-exercise
 ```
 
-### **Quick Commands Reference**
-
-- git status → What changed?
-- git add <file> → Stage a file for commit
-- git commit -m "Message" → Save a snapshot
-- git push origin <branch> → Upload your work
-- git pull origin main → Get the latest updates
-
-### **Common Tips**
-
-- **Commit often**: small, meaningful commits are easier to manage than one giant one.
-- **Write clear messages**: e.g., Added toggle button, not just stuff.
-- **Don’t edit other people’s folders**: keep to your own weekly work.
-- **If you break something**: you can always go back with git checkout.
 
 
+### Quick Git Reference
+	•	git status → what changed
+	•	git add <file> → stage a file
+	•	git commit -m "Message" → save a snapshot
+	•	git push origin <branch> → upload your work
+	•	git pull origin main → update from class repo
 
-## **Git + Canvas**
 
-If the class uses GitHub:
+### Checklist Before Submitting
+	•	My code runs without errors
+	•	I replaced [Your Name] in the weekly header
+	•	I committed with a clear message (not just stuff)
+	•	I pushed to GitHub and can see my files online
+	•	I submitted the correct link in Canvas
 
-- Push your work regularly.
-- Submit the **link to your branch or folder** in Canvas.
+### Resources
+	•	p5.js tutorials
+	•	Creative Coding (Allison Parrish)
+	•	Aesthetic Programming (Soon & Cox)
 
-If not:
 
-- Zip your folder and upload. Git is still useful locally for version control.
+
+**2025 Prof. Goodwin · DESMA 28: Interactivity**
 
