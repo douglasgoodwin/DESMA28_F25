@@ -4,7 +4,7 @@
 // ----------------------------------------------
 // NAME: [Your Full Name]
 // DATE: [MM/DD/YY]
-// W01 | Exercise
+// W6 | Exercise
 // ----------------------------------------------
 
 let buttonX, buttonY;    // button center
@@ -16,48 +16,36 @@ function setup() {
   let cnv = createCanvas(900, 400);
   cnv.parent('canvas-container');
 
-  // center the button relative to the canvas size
+  // center the button
   buttonX = width / 2;
   buttonY = height / 2;
-
-  // Optional: set up text look
-  textFont('monospace');
-  textSize(18);
 }
 
 function draw() {
   background(240);
 
-  // draw button rectangle from its center
+  // draw button rectangle
   rectMode(CENTER);
   stroke(0);
-  strokeWeight(2);
-
-  // white when off, red-ish when on
-  if (buttonPressed) {
-    fill(200, 0, 0);
-  } else {
-    fill(255);
-  }
-
+  fill(buttonPressed ? color(200, 0, 0) : color(255));
   rect(buttonX, buttonY, buttonW, buttonH, 10);
 
   // button label
-  noStroke();
   fill(0);
+  noStroke();
   textAlign(CENTER, CENTER);
+  textSize(18);
   text("Press Me", buttonX, buttonY);
 }
 
 function mousePressed() {
   // check if mouse is inside button bounds
-  const inside =
+  if (
     mouseX > buttonX - buttonW/2 &&
     mouseX < buttonX + buttonW/2 &&
     mouseY > buttonY - buttonH/2 &&
-    mouseY < buttonY + buttonH/2;
-
-  if (inside) {
+    mouseY < buttonY + buttonH/2
+  ) {
     buttonPressed = !buttonPressed; // toggle state
   }
 }

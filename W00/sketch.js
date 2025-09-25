@@ -4,50 +4,60 @@
 // ----------------------------------------------
 // NAME: [Your Full Name]
 // DATE: [MM/DD/YY]
-// WEEK: W00 | Orientation: Hello, p5.js
+// W00 | Exercise
 // ----------------------------------------------
 
-let x, y;       // position
-let dx, dy;     // velocity
-let r = 20;     // radius of ball
+let buttonX, buttonY;    // button center
+let buttonW = 150;       // button width
+let buttonH = 60;        // button height
+let buttonPressed = false;
 
 function setup() {
-  let cnv = createCanvas(800, 400);
+  let cnv = createCanvas(900, 400);
   cnv.parent('canvas-container');
-  
-  // initialize position and velocity
-  x = 100;
-  y = 100;
-  dx = 3;
-  dy = 2;
+
+  // center the button relative to the canvas size
+  buttonX = width / 2;
+  buttonY = height / 2;
+
+  // Optional: set up text look
+  textFont('monospace');
+  textSize(18);
 }
 
 function draw() {
-  background(250);
+  background(240);
 
-  // update position
-  x += dx;
-  y += dy;
+  // draw button rectangle from its center
+  rectMode(CENTER);
+  stroke(0);
+  strokeWeight(2);
 
-  // bounce off edges
-  if (x - r < 0 || x + r > width) {
-    dx *= -1;
+  // white when off, red-ish when on
+  if (buttonPressed) {
+    fill(200, 0, 0);
+  } else {
+    fill(255);
   }
-  if (y - r < 0 || y + r > height) {
-    dy *= -1;
-  }
 
-  // draw ball
-  circle(x, y, r * 2);
+  rect(buttonX, buttonY, buttonW, buttonH, 10);
 
-  // draw text feedback
+  // button label
+  noStroke();
   fill(0);
-  textSize(16);
-  text(`x: ${x}`, 10, 20);
-  text(`y: ${y}`, 10, 40);
-  text(`dx: ${dx}`, 10, 60);
-  text(`dy: ${dy}`, 10, 80);
+  textAlign(CENTER, CENTER);
+  text("Press Me", buttonX, buttonY);
+}
 
-  // also log to console
-  console.log(`x=${x}, y=${y}, dx=${dx}, dy=${dy}`);
+function mousePressed() {
+  // check if mouse is inside button bounds
+  const inside =
+    mouseX > buttonX - buttonW/2 &&
+    mouseX < buttonX + buttonW/2 &&
+    mouseY > buttonY - buttonH/2 &&
+    mouseY < buttonY + buttonH/2;
+
+  if (inside) {
+    buttonPressed = !buttonPressed; // toggle state
+  }
 }
